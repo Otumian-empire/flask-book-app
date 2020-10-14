@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 14, 2020 at 02:31 PM
+-- Generation Time: Oct 14, 2020 at 11:55 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `item` (
   `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
-  `isbn` int(11) NOT NULL,
+  `isbn` varchar(50) NOT NULL,
   `quantity` int(11) NOT NULL,
   `add_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `update_at` timestamp NULL DEFAULT NULL

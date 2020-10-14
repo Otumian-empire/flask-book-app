@@ -1,4 +1,5 @@
 from os import environ
+from uuid import uuid4
 
 import mysql.connector
 from dotenv import load_dotenv
@@ -32,7 +33,11 @@ class DB:
 
 
 class Item:
-    """ id, title, isbn, quantity """
+    """
+    id, title, isbn, quantity
+
+    use uuid4 in place of isbn but let property rename
+    """
 
     def __init__(self):
         db = DB()
@@ -40,12 +45,16 @@ class Item:
         self.cur = db.get_cursor(self.db_conn)
 
     def create(self, title, quantity=1):
-        isbn = self.generate_isbn()
+        isbn = str(self.generate_isbn())
 
-        sql_query = "INSERT INTO `item`(title`, `isbn`, `quantity`) VALUES (%s, %s, %s);"
-        values = (title, isbn, quantity)
+        sql_query = "INSERT INTO `item`(`title`, `isbn`, `quantity`) VALUES (%s, %s, %s);"
+        values = (title.lower(), isbn, quantity)
 
-        self.cur.execute(sql_query, values)
+        try:
+            self.cur.execute(sql_query, values)
+        except (Exception, mysql.connector.Error) as e:
+            print(str(e))
+            return False
 
         if not self.cur:
             return False
@@ -60,10 +69,14 @@ class Item:
 
         sql_query = "SELECT `id`, `title`, `isbn`, `quantity`, `add_at`, `update_at` FROM `item`;"
 
-        self.cur.execute(sql_query)
+        try:
+            self.cur.execute(sql_query)
+        except (Exception, mysql.connector.Error) as e:
+            print(str(e))
+            return items
 
         if not self.cur:
-            return False
+            return items
 
         items = self.cur.fetchall()
 
@@ -71,17 +84,20 @@ class Item:
 
         return items
 
-    def select_one(self, item_key, item_value):
+    def select_one(self, item):
+        item_key, item_value = list(item.items())[0]
+
         sql_query = f"SELECT `id`, `title`, `isbn`, `quantity`, `add_at`, `update_at` FROM `item` WHERE `{item_key}`=%s;"
+        values = (str(item_value).lower(), )
 
         try:
-            self.cur.execute(sql_query, (item_value, ))
+            self.cur.execute(sql_query, values)
         except (Exception, mysql.connector.Error) as e:
             print(str(e))
-            return False
+            return []
 
         if not self.cur:
-            return False
+            return []
 
         item = self.cur.fetchone()
 
@@ -89,20 +105,56 @@ class Item:
 
         return item
 
-    def update(self):
-        pass
+    def update(self, item, where_clause):
+        item_key, item_value = list(item.items())[0]
+        where_clause_key, where_clause_value = list(where_clause.items())[0]
 
-    def delete(self):
-        pass
+        sql_query = f"UPDATE `item` SET `{item_key}`=%s, `update_at`=CURRENT_TIMESTAMP WHERE `{where_clause_key}`=%s;"
+        values = (str(item_value).lower(), str(where_clause_value).lower())
+
+        try:
+            self.cur.execute(sql_query, values)
+        except (Exception, mysql.connector.Error) as e:
+            print(str(e))
+            return False
+
+        if not self.cur:
+            return False
+
+        self.db_conn.commit()
+        self.db_conn.close()
+
+        return True
+
+    def delete(self, item):
+        item_key, item_value = list(item.items())[0]
+
+        sql_query = f"DELETE FROM `item` WHERE `{item_key}`=%s;"
+        values = (str(item_value).lower(), )
+
+        try:
+            self.cur.execute(sql_query, values)
+        except (Exception, mysql.connector.Error) as e:
+            print(str(e))
+            return False
+
+        if not self.cur:
+            return False
+
+        self.db_conn.commit()
+        self.db_conn.close()
+
+        return True
 
     @staticmethod
-    def generate_id():
-        pass
+    def generate_isbn():
+        return uuid4()
 
-    @classmethod
-    def scan_data_title(cls, title):
-        pass
 
-    @classmethod
-    def scan_data_isbn(cls, isbn):
-        pass
+# i = Item()
+
+# print(i.create('24pill-code'))
+# print(i.select_all())
+# print(i.select_one({'title':'24pill-code'}))
+# print(i.update({'title':'24pill-code-book'}, {'title':'24pill-code'}))
+# print(i.delete({'title':'24pill-code-book'}))
