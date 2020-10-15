@@ -1,3 +1,10 @@
 .vscode
 __pycache__
 .env.local
+app/templates
+app/templates/read_one.html
+app/templates/update.html
+
+# export FLASK_APP=run.py
+# export FLASK_END=developement
+# export FLASK_DEBUG=true

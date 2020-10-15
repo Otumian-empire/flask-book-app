@@ -26,7 +26,6 @@ def delete(*, item):
     item_ = Item()
     return item_.delete(item)
 
-print('models')
 # print(create_item(item_name='24pill-code', item_quantity=100))
 # print(read_all_items())
 # print(read_one_item(item={'title': '24pill-code'}))
