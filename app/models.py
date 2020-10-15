@@ -1,6 +1,6 @@
 # Assuming this is a valid databse model
-# from app.item import Item
-from . import item
+from .item import Item
+
 
 def create_item(*, item_name, item_quantity=1):
     item_ = Item()
@@ -26,12 +26,14 @@ def delete(*, item):
     item_ = Item()
     return item_.delete(item)
 
-
-print(create_item('24pill-code', 100))
-print(read_all_items())
-print(read_one_item({'title':'24pill-code'}))
-print(update({'title':'24pill-code-book'}, {'title':'24pill-code'}))
-print(delete({'title':'24pill-code-book'}))
+print('models')
+# print(create_item(item_name='24pill-code', item_quantity=100))
+# print(read_all_items())
+# print(read_one_item(item={'title': '24pill-code'}))
+# print(update(
+#     item={'title': '24pill-code-book'},
+#     where_clause={'title': '24pill-code'}))
+# print(delete(item={'title': '24pill-code-book'}))
 
 
 # TODO: Implement corresponding component in `item.py`
