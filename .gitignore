@@ -1,7 +1,6 @@
 .vscode
 __pycache__
 .env.local
-app/templates
 app/templates/read_one.html
 app/templates/update.html
 

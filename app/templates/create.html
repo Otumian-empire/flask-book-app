@@ -1,0 +1,11 @@
+{% extends 'layout.html'%}
+{% block body %}
+<form class="form-inline" action="{{ url_for('create') }}" method="POST">
+    <label for="book_title">Book Title:</label>
+    <input type="text" id="book_title" placeholder="Enter book title" name="book_title" value="{{ book_title }}">
+    <label for="book_quantity">Book Quantity:</label>
+    <input type="text" id="book_quantity" placeholder="Enter book quantity" name="book_quantity"
+        value="{{ book_quantity }}">
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}

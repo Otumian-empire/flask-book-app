@@ -3,6 +3,10 @@ from .item import Item
 
 
 def create_item(*, item_name, item_quantity=1):
+
+    if int(float(item_quantity)) < 1:
+        item_quantity = 1
+
     item_ = Item()
     return item_.create(item_name, item_quantity)
 

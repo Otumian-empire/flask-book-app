@@ -101,11 +101,11 @@ Add responsiveness - display the form controls vertically instead of horizontall
 }
 
 .alert-success {
-    background-color: #f44336;
+    background-color:#25b900;
 }
 
 .alert-danger {
-    background-color: #25b900;
+    background-color:  #f44336;
 }
 
 /* Table */

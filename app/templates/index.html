@@ -1,0 +1,40 @@
+{% extends 'layout.html'%}
+{% block body %}
+<table>
+    <h3>Available books</h3>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>ISBN</th>
+            <th>Quantity</th>
+            <th>Created on</th>
+            <th>Updated on</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% if books %}
+        {% for book in books %}
+        <tr>
+            <td><a href="{{ url_for('read_one',id=book[0]) }}">{{ book[0] }}</a></td>
+            <td>{{ book[1] }}</td>
+            <td>{{ book[2] }}</td>
+            <td>{{ book[3] }}</td>
+            <td>{{ book[4] }}</td>
+            <td>{% if book[5] %}{{ book[5] }}{% else %} - {% endif %}</td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td> - </td>
+            <td> - </td>
+            <td> - </td>
+            <td> - </td>
+            <td> - </td>
+            <td> - </td>
+        </tr>
+        {% endif %}
+    </tbody>
+</table>
+{% endblock %}
