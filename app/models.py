@@ -3,10 +3,6 @@ from .item import Item
 
 
 def create_item(*, item_name, item_quantity=1):
-
-    if int(float(item_quantity)) < 1:
-        item_quantity = 1
-
     item_ = Item()
     return item_.create(item_name, item_quantity)
 
@@ -21,12 +17,12 @@ def read_all_items():
     return item_.select_all()
 
 
-def update(*, item, where_clause):
+def update_item(*, item, where_clause):
     item_ = Item()
     return item_.update(item, where_clause)
 
 
-def delete(*, item):
+def delete_item(*, item):
     item_ = Item()
     return item_.delete(item)
 

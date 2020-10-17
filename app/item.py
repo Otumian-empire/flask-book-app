@@ -106,11 +106,20 @@ class Item:
         return item
 
     def update(self, item, where_clause):
-        item_key, item_value = list(item.items())[0]
+        # `{item_key}`=%s,
+        set_body_keys = ""
+
+        for set_item in item.items():
+            set_body_keys += f"`{set_item[0]}`=%s,"
+
+        set_item_values = tuple([str(set_item[1]).lower()
+                                 for set_item in item.items()])
+
         where_clause_key, where_clause_value = list(where_clause.items())[0]
 
-        sql_query = f"UPDATE `item` SET `{item_key}`=%s, `update_at`=CURRENT_TIMESTAMP WHERE `{where_clause_key}`=%s;"
-        values = (str(item_value).lower(), str(where_clause_value).lower())
+        values = set_item_values + (str(where_clause_value).lower(),)
+
+        sql_query = f"UPDATE `item` SET {set_body_keys} `update_at`=CURRENT_TIMESTAMP WHERE `{where_clause_key}`=%s;"
 
         try:
             self.cur.execute(sql_query, values)

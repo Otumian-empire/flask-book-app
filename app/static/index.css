@@ -101,11 +101,11 @@ Add responsiveness - display the form controls vertically instead of horizontall
 }
 
 .alert-success {
-    background-color:#25b900;
+    background-color: #25b900;
 }
 
 .alert-danger {
-    background-color:  #f44336;
+    background-color: #f44336;
 }
 
 /* Table */
@@ -120,7 +120,7 @@ table {
 /* Zebra striping */
 
 tr:nth-of-type(odd) {
-    background: #884242;
+    background: #000000;
 }
 
 th {
@@ -212,4 +212,21 @@ and also iPads specifically.
 
 .cpadding {
     padding: 2px 16px;
+}
+
+/* Delete Link */
+
+.delete-link:link, .delete-link:visited {
+    background-color: #4bd41533;
+    color: white;
+    padding: 5px 7PX;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 3px;
+    margin: 3px 0;
+}
+
+.delete-link:hover, a:active {
+    background-color: #2f13cf33;
 }

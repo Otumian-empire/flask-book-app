@@ -34,6 +34,7 @@ six==1.15.0
 - [w3schools-py-mysql]
 - [w3schools-howto_js_alert]
 - [css-tricks-responsive-data-tables]
+- [w3schools-css_link]
 
 #
 
@@ -42,5 +43,6 @@ six==1.15.0
 [pydoc-uuid4]: https://docs.python.org/3/library/uuid.html#example
 [pythonanywhere]: https://www.pythonanywhere.com
 [pythonise-learning-flask]: https://pythonise.com/series/learning-flask/
+[w3schools-css_link]: https://www.w3schools.com/Css/css_link.asp
 [w3schools-howto_js_alert]: https://www.w3schools.com/howto/howto_js_alert.asp
 [w3schools-py-mysql]: https://www.w3schools.com/python/python_mysql_getstarted.asp

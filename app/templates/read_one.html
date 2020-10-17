@@ -1,0 +1,13 @@
+{% extends 'layout.html'%}
+{% block body %}
+<div class="card">
+    <!-- <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" style="width:40%"> -->
+    <div class="cpadding">
+        <h3>{{ book[0] }} - {{ book[1] }} ({{ book[3] }})</h3>
+        <p><span>{{ book[2] }}</span></p>
+        <p><span>{{ book[4] }}</span> - <span>{% if book[5] %}{{ book[5] }}{% else %} Not Yet {% endif %}</span></p>
+        <a class="delete-link" href="{{ url_for('delete',id=book[0]) }}">Delete</a>
+        <a class="delete-link" href="{{ url_for('update',id=book[0]) }}">Update</a>
+    </div>
+</div>
+{% endblock %}

@@ -5,7 +5,8 @@ from os import environ
 from dotenv import load_dotenv
 
 load_dotenv('./.env.local')
-App.secret_key =environ.get('SECRET_KEY')
+App.secret_key = environ.get('SECRET_KEY')
+
 
 from . import urls
 
